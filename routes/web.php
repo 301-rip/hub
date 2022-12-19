@@ -6,13 +6,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'index'])->name('home');
 
-/**
- * All routes should be registered before this
- * The following is a catch-all route
- */
-
-// @todo - route naming reckoning once we figure out what is actually happening
-
 Route::get('/{url}', [RedirectsController::class, 'create'])
 	->where('url', '([Hh][Tt]{2}[Pp][Ss]?:\/\/)?([\w\-]+\.)+([a-zA-Z]{2,63})(\/.*)?')
 	->name('redirects.create');

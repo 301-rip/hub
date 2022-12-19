@@ -8,26 +8,28 @@
 	@vite(['resources/css/app.css'])
 </head>
 <body class="m-0 p-0">
-<div class="absolute inset-0 overflow-hidden flex items-center bg-red-200 space-x-4">
-	<div class="flex-1 text-right">
-		<h1 class="text-xs opacity-50">
+<div class="absolute inset-0 overflow-hidden bg-green-600 text-white p-8 space-y-6 md:flex md:items-center md:p-0 md:space-y-0 md:space-x-4">
+	<div class="flex-1 md:text-right">
+		<h1 class="text-xs opacity-50 lg:text-sm xl:text-base">
 			Original
 		</h1>
-		<div>
+		<div class="text-base lg:text-xl xl:text-3xl">
 			{{ $original }}
 		</div>
 	</div>
-	<div class="flex-shrink-0">
+	<div class="flex-shrink-0 hidden md:block">
 		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
 			<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
 		</svg>
 	</div>
 	<div class="flex-1">
-		<h1 class="text-xs opacity-50">
+		<h1 class="text-xs opacity-50 lg:text-sm xl:text-base">
 			RIP
 		</h1>
 		<div class="inline-flex">
-			{{ $rip }}
+			<div class="text-base lg:text-xl xl:text-3xl">
+				{{ $rip }}
+			</div>
 			<button
 				x-data="copyToClipboard(@js($rip))"
 				class="hidden"
