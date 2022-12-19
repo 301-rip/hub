@@ -10,9 +10,8 @@ return new class extends Migration
     {
         Schema::create('known_instances', function (Blueprint $table) {
             $table->id();
-
-            $table->string('domain');
-
+            $table->string('domain')->unique();
+            $table->string('slug', 10)->nullable();
             $table->timestamps();
         });
     }
