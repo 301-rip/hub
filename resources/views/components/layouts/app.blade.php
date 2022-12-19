@@ -10,9 +10,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
 
-    <body class="m-0 p-0 bg-gray-100 flex min-h-screen items-start justify-center">
-        <div class="bg-white rounded-lg shadow p-6 my-12 border">
-            {{ $slot ?? '' }}
+    <body class="m-0 p-0 bg-slate-700 flex flex-col min-h-screen  items-center justify-center">
+        <div class="flex flex-col items-center justify-center">
+            @svg('mammoth2', 'h-48')
+            <div class="w-90% max-w-xl relative my-12 before:absolute before:left-4 before:top-4 before:w-full before:h-full before:z-20 before:rounded-lg before:bg-gradient-to-tl before:from-cyan-400 before:to-indigo-500">
+                <div class="relative shadow bg-slate-100 rounded-lg shadow p-8 border-black z-30">
+                    {{ $slot ?? '' }}
+                </div>
+            </div>
         </div>
         @stack('js')
         @routes
