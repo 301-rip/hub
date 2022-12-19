@@ -7,12 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 
 class KnownInstance extends Model
 {
-	use HasFactory;
+    use HasFactory;
 
-	public function url(string $path): string
-	{
-		return 'https://'.$this->domain.'/'.ltrim($path, '/');
-	}
+    public function url(string $path): string
+    {
+        return 'https://'.$this->domain.'/'.ltrim($path, '/');
+    }
 
     public function getRouteKeyName()
     {
