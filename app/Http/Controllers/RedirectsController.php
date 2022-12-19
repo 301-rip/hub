@@ -19,17 +19,23 @@ class RedirectsController extends Controller
         ]);
     }
 
-    public function show(KnownInstance $instance, $path)
+    public function show(Request $request, KnownInstance $instance, $path)
     {
-        return view('redirects.show', [
-            'url' => $this->obfuscate($instance->url($path)),
-        ]);
-    }
+        if ($request->attributes->get('twitter', false)) {
+            // TODO: Add og:image that shows URL using https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation
+            return view('redirects.twitter');
+        }
 
-    protected function obfuscate(string $url): Js
-    {
-        $chunks = str_split(base64_encode($url), random_int(5, 10));
+        $response = redirect($instance->url($path));
 
-        return Js::from($chunks);
+        if (app()->isProduction()) {
+            $response->setStatusCode(301);
+            $response->setMaxAge(60 * 60 * 24 * 365);
+            $response->setSharedMaxAge(60 * 60 * 24 * 365);
+            $response->setPublic();
+            $response->setImmutable();
+        }
+
+        return $response;
     }
 }
