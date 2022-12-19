@@ -13,11 +13,14 @@ Route::get('/', [PagesController::class, 'index'])->name('home');
 
 // @todo - route naming reckoning once we figure out what is actually happening
 
-Route::get('/redirect', function () {
-    return session('redirect');
-})->name('redirects.show');
+Route::get('/{url}', [RedirectsController::class, 'create'])
+	->where('url', '([Hh][Tt]{2}[Pp][Ss]?:\/\/)?([\w\-]+\.)+([a-zA-Z]{2,63})(\/.*)?')
+	->name('redirects.create');
 
-Route::get('/{instance}/{user?}/{post?}', RedirectsController::class)->name('redirect');
+Route::get('/{instance}/{path}', [RedirectsController::class, 'show'])
+	->where('instance', '(\\d+|[a-z]{2,})')
+	->where('path', '.+')
+	->name('redirects.show');
 
 Route::domain('{domain}')->group(function () {
     Route::get('/{user?}/{post?}', fn() => null)->name('redirects.external');

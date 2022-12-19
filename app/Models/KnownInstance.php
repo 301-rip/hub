@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class KnownInstance extends Model
 {
-    use HasFactory;
-
-    protected $guarded = [];
+	use HasFactory;
+	
+	public function url(string $path): string
+	{
+		return 'https://'.$this->domain.'/'.ltrim($path, '/');
+	}
 }
