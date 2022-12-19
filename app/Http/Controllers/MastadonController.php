@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
+use League\OAuth1\Client\Server\Server;
+use Revolution\Mastodon\Facades\Mastodon;
 
 
 class MastodonController extends Controller
