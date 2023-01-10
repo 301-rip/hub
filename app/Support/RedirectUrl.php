@@ -3,7 +3,6 @@
 namespace App\Support;
 
 use App\Models\KnownInstance;
-use Illuminate\Support\Facades\Http;
 
 class RedirectUrl
 {
@@ -23,11 +22,7 @@ class RedirectUrl
         $this->path = $parsed['path'] ?? null;
         $this->query = $parsed['query'] ?? null;
 
-        $this->validateHost($this->host);
-
-        $this->instance = KnownInstance::firstOrCreate([
-            'domain' => $this->host,
-        ]);
+        $this->instance = KnownInstance::forHost($this->host);
     }
 
     public function __toString(): string
@@ -47,14 +42,5 @@ class RedirectUrl
         }
 
         return $path;
-    }
-
-    protected function validateHost(string $host): void
-    {
-        $source_url = Http::baseUrl($host)->get('/api/v2/instance')->json('source_url');
-
-        abort_unless('https://github.com/mastodon/mastodon' === $source_url, 404);
-
-        // FIXME: Have some deny list somewhere
     }
 }
